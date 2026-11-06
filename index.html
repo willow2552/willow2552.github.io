@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>b站百科-B站百科词条查询_B站百科是什么_哔哩哔哩百科内容浏览</title>
+<meta name="description" content="b站百科是围绕哔哩哔哩站点与内容生态的词条知识页面，汇总平台概况、常用术语、分区与稿件概念、社区规范与查词方式，帮助访问者快速理解B站相关条目并找到对应内容。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fb7299'/%3E%3Cpath d='M20 16l-6-6M44 16l6-6' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Crect x='12' y='20' width='40' height='28' rx='8' fill='%23fff'/%3E%3Ccircle cx='25' cy='33' r='3.4' fill='%23fb7299'/%3E%3Ccircle cx='39' cy='33' r='3.4' fill='%23fb7299'/%3E%3C/svg%3E">
+<style>
+:root{
+  --pink:#fb7299;
+  --pink-deep:#e8557f;
+  --blue:#23ade5;
+  --ink:#1d2129;
+  --gray:#5c6470;
+  --line:#e8ebf0;
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --radius:16px;
+  --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--pink-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* header */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--ink);letter-spacing:.5px}
+.brand:hover{text-decoration:none;color:var(--pink-deep)}
+.brand svg{width:36px;height:36px;flex:0 0 auto}
+nav.main{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{
+  color:var(--gray);font-size:14.5px;font-weight:600;
+  padding:6px 11px;border-radius:9px;
+}
+nav.main a:hover{background:#fdeef3;color:var(--pink-deep);text-decoration:none}
+
+/* hero */
+.hero{
+  background:linear-gradient(160deg,#fff2f6 0%,#eef9fe 60%,#f7f8fa 100%);
+  border-bottom:1px solid var(--line);
+  padding:52px 0 46px;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#fff;border:1px solid #f7c9d8;color:var(--pink-deep);
+  font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:16px;
+}
+h1{font-size:clamp(30px,4.4vw,46px);line-height:1.18;font-weight:900;letter-spacing:-.5px}
+.hero p.lead{margin-top:16px;color:var(--gray);font-size:16.5px;max-width:36em}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;border-radius:11px;font-weight:700;font-size:15px;
+  border:1px solid transparent;cursor:pointer;transition:.18s;
+}
+.btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 16px rgba(251,114,153,.32)}
+.btn-primary:hover{background:var(--pink-deep);text-decoration:none;color:#fff}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--pink);color:var(--pink-deep);text-decoration:none}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.hero-figure{
+  background:#fff;border:1px solid var(--line);border-radius:22px;
+  padding:22px;box-shadow:0 18px 40px -24px rgba(35,173,229,.35);
+}
+.hero-figure figcaption{font-size:13px;color:var(--gray);margin-top:12px;text-align:center}
+
+/* search */
+.searchbar{
+  margin-top:26px;display:flex;gap:10px;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:6px 6px 6px 16px;max-width:520px;
+  box-shadow:0 10px 24px -18px rgba(29,33,41,.4);
+}
+.searchbar input{
+  flex:1;border:0;outline:0;font-size:15px;color:var(--ink);background:transparent;
+  font-family:inherit;min-width:0;
+}
+.searchbar button{
+  border:0;background:var(--pink);color:#fff;font-weight:700;font-size:14.5px;
+  padding:8px 18px;border-radius:9px;cursor:pointer;font-family:inherit;
+}
+.searchbar button:hover{background:var(--pink-deep)}
+.hint{font-size:13px;color:var(--gray);margin-top:10px}
+.hint b{color:var(--pink-deep);font-weight:700}
+
+/* sections */
+section{padding:56px 0}
+.sec-head{max-width:640px;margin-bottom:30px}
+.sec-kicker{color:var(--blue);font-weight:800;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+h2{font-size:clamp(22px,2.6vw,29px);font-weight:900;margin-top:6px;letter-spacing:-.3px}
+.sec-head p{color:var(--gray);margin-top:10px;font-size:15.5px}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 22px;transition:.2s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px -22px rgba(29,33,41,.55);border-color:#f6cddb}
+.card .ico{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;
+  background:#fdeef3;color:var(--pink-deep);
+}
+.card.blue .ico{background:#e7f6fd;color:#1592c4}
+.card h3{font-size:17.5px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--gray);font-size:14.5px}
+
+/* terms */
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+.term{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+}
+.term dt{font-weight:800;font-size:15px;color:var(--ink)}
+.term dt span{font-size:12px;color:var(--blue);font-weight:700;margin-left:6px}
+.term dd{font-size:13.8px;color:var(--gray);margin-top:4px}
+
+/* article layout */
+.split{display:grid;grid-template-columns:1.4fr .8fr;gap:34px;align-items:start}
+.prose{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 30px 26px}
+.prose h3{font-size:19px;font-weight:800;margin:22px 0 8px}
+.prose h3:first-child{margin-top:0}
+.prose p{color:#3b424d;font-size:15.4px;margin-bottom:12px}
+.prose ul{margin:0 0 14px 20px;color:#3b424d;font-size:15px}
+.prose li{margin-bottom:6px}
+.aside{display:flex;flex-direction:column;gap:16px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.panel h4{font-size:15px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.panel h4::before{content:"";width:4px;height:15px;border-radius:2px;background:var(--pink)}
+.panel p,.panel li{font-size:13.8px;color:var(--gray)}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.panel ul li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.panel ul li:last-child{border:0;padding-bottom:0}
+.panel ul a{font-weight:700;color:var(--ink)}
+.panel ul a:hover{color:var(--pink-deep)}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.rule{background:#fff;border-left:4px solid var(--pink);border-radius:10px;padding:18px 20px;box-shadow:0 8px 22px -20px rgba(29,33,41,.6)}
+.rule:nth-child(2){border-left-color:var(--blue)}
+.rule:nth-child(3){border-left-color:#f5c04a}
+.rule h3{font-size:16px;font-weight:800;margin-bottom:6px}
+.rule p{font-size:14.2px;color:var(--gray)}
+
+/* cta */
+.cta{
+  background:linear-gradient(120deg,#fb7299,#ff9bb8 55%,#23ade5);
+  border-radius:22px;padding:40px 34px;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+}
+.cta h2{color:#fff;margin:0}
+.cta p{color:rgba(255,255,255,.92);font-size:15px;margin-top:8px;max-width:34em}
+.cta .btn{background:#fff;color:var(--pink-deep);box-shadow:none}
+.cta .btn:hover{background:#fff6f9;color:var(--pink-deep);text-decoration:none}
+
+/* footer */
+footer.site{background:#fff;border-top:1px solid var(--line);padding:36px 0 30px;margin-top:10px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+.foot-brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;margin-bottom:10px}
+.foot-brand svg{width:30px;height:30px}
+footer.site p,footer.site li{font-size:13.5px;color:var(--gray)}
+footer.site h5{font-size:14px;font-weight:800;margin-bottom:10px;color:var(--ink)}
+footer.site ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.copy{border-top:1px solid var(--line);margin-top:26px;padding-top:18px;font-size:13px;color:#8a929e;text-align:center}
+
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-figure{order:-1}
+  .split{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .cta{padding:30px 22px}
+}
+@media(max-width:520px){
+  body{font-size:15.5px}
+  .nav-inner{padding:9px 16px;gap:10px}
+  .brand{font-size:18px}
+  nav.main{margin-left:0;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px}
+  nav.main a{white-space:nowrap;font-size:14px;padding:5px 9px}
+  .hero{padding:34px 0 32px}
+  .hero-actions .btn{flex:1 1 auto;justify-content:center}
+  section{padding:40px 0}
+  .prose{padding:22px 20px}
+  .foot-grid{grid-template-columns:1fr}
+  .searchbar{padding-left:12px}
+  .searchbar button{padding:8px 13px}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="b站百科 首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#fb7299"/>
+        <path d="M20 16l-6-6M44 16l6-6" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        <rect x="12" y="20" width="40" height="28" rx="8" fill="#fff"/>
+        <circle cx="25" cy="33" r="3.4" fill="#fb7299"/>
+        <circle cx="39" cy="33" r="3.4" fill="#fb7299"/>
+      </svg>
+      b站百科
+    </a>
+    <nav class="main" aria-label="主导航">
+      <a href="#about">词条概况</a>
+      <a href="#terms">常用术语</a>
+      <a href="#read">阅读与查词</a>
+      <a href="#rules">社区规范</a>
+      <a href="#search">站内检索</a>
+      <a href="#cta">开始浏览</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          哔哩哔哩内容生态词条
+        </span>
+        <h1>b站百科</h1>
+        <p class="lead">b站百科把哔哩哔哩的平台概况、内容分区、常用术语与社区规范整理成可检索的词条页面，让第一次接触B站的访客与长期用户都能按条目找到需要的信息。</p>
+
+        <form class="searchbar" id="search" role="search" onsubmit="return false;">
+          <input id="q" type="search" placeholder="输入词条关键词，如 弹幕、稿件、分区" aria-label="在b站百科中检索词条">
+          <button type="button" id="goBtn">查词条</button>
+        </form>
+        <p class="hint" id="searchHint">可在本页检索<b>弹幕</b>、<b>稿件</b>、<b>分区</b>、<b>UP主</b>等词条。</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#terms">浏览常用术语</a>
+          <a class="btn btn-ghost" href="#about">了解 b站百科</a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <svg viewBox="0 0 360 240" role="img" aria-label="词条卡片与检索示意图">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffe3ec"/><stop offset="1" stop-color="#e2f6fe"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="360" height="240" rx="16" fill="url(#g1)"/>
+          <rect x="24" y="26" width="180" height="16" rx="8" fill="#fff"/>
+          <rect x="24" y="52" width="120" height="10" rx="5" fill="#ffffff" opacity=".75"/>
+          <rect x="24" y="82" width="312" height="52" rx="12" fill="#fff"/>
+          <circle cx="50" cy="108" r="13" fill="#fb7299" opacity=".18"/>
+          <path d="M44 108l4.4 4.4L57 103" stroke="#fb7299" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="74" y="96" width="120" height="9" rx="4.5" fill="#1d2129" opacity=".7"/>
+          <rect x="74" y="112" width="180" height="8" rx="4" fill="#5c6470" opacity=".35"/>
+          <rect x="24" y="146" width="150" height="66" rx="12" fill="#fff"/>
+          <rect x="40" y="162" width="60" height="8" rx="4" fill="#23ade5" opacity=".65"/>
+          <rect x="40" y="178" width="110" height="7" rx="3.5" fill="#5c6470" opacity=".3"/>
+          <rect x="40" y="192" width="86" height="7" rx="3.5" fill="#5c6470" opacity=".3"/>
+          <rect x="186" y="146" width="150" height="66" rx="12" fill="#fff"/>
+          <rect x="202" y="162" width="52" height="8" rx="4" fill="#fb7299" opacity=".7"/>
+          <rect x="202" y="178" width="110" height="7" rx="3.5" fill="#5c6470" opacity=".3"/>
+          <rect x="202" y="192" width="72" height="7" rx="3.5" fill="#5c6470" opacity=".3"/>
+        </svg>
+        <figcaption>按条目组织：概况、术语、分区、规范，一处查全。</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Overview</div>
+        <h2>b站百科收录什么</h2>
+        <p>词条围绕B站的使用场景展开，先回答“是什么”，再给出“怎么用”，让检索结果可以直接落到具体条目上。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H7l-3 3z"/></svg>
+          </div>
+          <h3>平台与站点概况</h3>
+          <p>介绍哔哩哔哩的基本定位、内容形态与主要使用场景，帮助访客在短时间内建立对B站的完整认知框架。</p>
+        </article>
+        <article class="card blue">
+          <div class="ico" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+          </div>
+          <h3>常用术语条目</h3>
+          <p>弹幕、稿件、追番、三连等社区高频词汇单独成条，给出简明释义与使用位置，减少新用户的阅读门槛。</p>
+        </article>
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="2"/><rect x="14" y="4" width="7" height="7" rx="2"/><rect x="3" y="13" width="7" height="7" rx="2"/><rect x="14" y="13" width="7" height="7" rx="2"/></svg>
+          </div>
+          <h3>分区与内容概念</h3>
+          <p>说明番剧、动画、游戏、知识等分区之间的关系，以及稿件、播放、收藏等概念的准确含义与区别。</p>
+        </article>
+        <article class="card blue">
+          <div class="ico" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4-3 7-7 9-4-2-7-5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>社区约定与规范</h3>
+          <p>汇总弹幕礼仪、投稿注意点与常见行为边界，把分散在站点各处的规则整理成易读的条目说明。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS -->
+  <section id="terms" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Glossary</div>
+        <h2>高频术语速查</h2>
+        <p>以下条目是b站百科中被查阅最多的基础词，适合先建立语感，再进入具体分区内容。</p>
+      </div>
+      <dl class="terms">
+        <div class="term"><dt>弹幕 <span>danmaku</span></dt><dd>视频播放时在画面上横向滚动的即时评论，是B站最具辨识度的互动形式。</dd></div>
+        <div class="term"><dt>稿件 <span>投稿</span></dt><dd>用户上传并通过审核后发布在站内的视频或其他内容，是内容组织的基本单位。</dd></div>
+        <div class="term"><dt>UP主 <span>创作者</span></dt><dd>在B站持续投稿的内容创作者，其主页集中展示稿件、合集与动态。</dd></div>
+        <div class="term"><dt>追番 <span>番剧</span></dt><dd>对连载或已完结动画作品的订阅式追看行为，更新时会在追番列表提示。</dd></div>
+        <div class="term"><dt>三连 <span>互动</span></dt><dd>指点赞、投币、收藏三项操作，常被创作者用来衡量一条稿件的反馈热度。</dd></div>
+        <div class="term"><dt>分区 <span>频道</span></dt><dd>按内容类型划分的栏目，如动画、游戏、知识、生活等，决定稿件的归类位置。</dd></div>
+        <div class="term"><dt>动态 <span>feed</span></dt><dd>用户与创作者发布短内容的区域，可承载图文、转发与抽奖等信息。</dd></div>
+        <div class="term"><dt>硬核会员 <span>答题</span></dt><dd>通过站内答题获得的会员身份，与普通注册账号在部分权限上存在差异。</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- READ -->
+  <section id="read">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">How to browse</div>
+        <h2>怎样用b站百科查一条词</h2>
+        <p>查词路径直接影响结果质量，先明确想弄清楚的对象，再选择对应的条目类型。</p>
+      </div>
+      <div class="split">
+        <div class="prose">
+          <h3>第一步：判断问题属于哪一类</h3>
+          <p>如果问题关于“这个词是什么意思”，应查术语条目；如果关于“这个分区放什么内容”，应查分区条目；如果关于“能不能发、怎么发”，则应查社区规范条目。b站百科把这些内容分开呈现，正是为了避免释义与规则混在一起。</p>
+
+          <h3>第二步：用关键词而不是整句检索</h3>
+          <p>站内检索以词条名为核心，输入“弹幕”“稿件”“追番”这类短词通常比输入完整问句更准确。若首次结果不理想，可换用同义说法，例如把“投币”与“硬币”分别尝试。</p>
+
+          <h3>第三步：交叉核对相邻条目</h3>
+          <p>许多概念彼此关联：稿件与分区、追番与番剧、三连与互动数据。阅读一条词条时，顺带查看其相邻条目，往往能补齐上下文。b站百科在条目说明中保留这种关联提示，便于连续阅读。</p>
+
+          <ul>
+            <li>术语类条目重在释义，篇幅短、结论直接。</li>
+            <li>分区类条目重在边界，说明收录范围与常见误放情形。</li>
+            <li>规范类条目重在行为，描述允许与不允许的具体做法。</li>
+          </ul>
+
+          <h3>关于条目时效</h3>
+          <p>平台功能与分区设置会调整，涉及具体入口、权限与页面的描述以站点当前实际状态为准。b站百科的条目以概念解释为主，减少对易变界面的依赖，使内容在较长时间内保持可用。</p>
+        </div>
+
+        <aside class="aside">
+          <div class="panel">
+            <h4>热门条目</h4>
+            <ul>
+              <li><a href="#terms">弹幕</a><span>互动</span></li>
+              <li><a href="#terms">稿件</a><span>内容</span></li>
+              <li><a href="#terms">UP主</a><span>创作者</span></li>
+              <li><a href="#terms">分区</a><span>归类</span></li>
+              <li><a href="#rules">弹幕礼仪</a><span>规范</span></li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h4>适合谁阅读</h4>
+            <p>刚接触B站、想快速弄懂社区用语的新用户；需要确认分区归属与投稿要求的创作者；以及把B站当作资料源、需要准确理解词义的研究者。</p>
+          </div>
+          <div class="panel">
+            <h4>阅读建议</h4>
+            <p>先读概况建立框架，再按需进入术语与规范。遇到不确定的说法，回到条目释义比对，比凭印象判断更可靠。</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section id="rules" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Community</div>
+        <h2>条目背后的社区约定</h2>
+        <p>理解B站的内容生态，除了知道词义，还需要知道这些词对应的行为边界。</p>
+      </div>
+      <div class="rules">
+        <article class="rule">
+          <h3>弹幕讲场合</h3>
+          <p>弹幕是公共可见的即时评论，发布时应避免遮挡关键画面、刷屏与无关内容。不同分区的观看氛围存在差异，入乡随俗是基本礼貌。</p>
+        </article>
+        <article class="rule">
+          <h3>投稿看分区</h3>
+          <p>稿件应投放到内容相符的分区。分区归属影响推荐与检索，误放会降低内容的可达性，也可能在审核阶段被要求调整。</p>
+        </article>
+        <article class="rule">
+          <h3>互动重真实</h3>
+          <p>点赞、投币、收藏与评论应基于真实观看感受。b站百科在相关条目中强调，互动数据的意义来自真实反馈，而非人为堆叠。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH PANEL -->
+  <section id="search">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Search</div>
+        <h2>在本页检索词条</h2>
+        <p>输入词条名后，页面会定位到对应的术语位置，并给出该词条的简要说明。</p>
+      </div>
+      <div class="split">
+        <div class="prose">
+          <h3>可用检索词</h3>
+          <p id="resultText">当前支持：弹幕、稿件、UP主、追番、三连、分区、动态、硬核会员。输入任意一个词即可查看对应释义，输入其他内容会提示回到术语区浏览全部条目。</p>
+          <h3>检索之外的方式</h3>
+          <p>也可以直接阅读<a href="#terms">高频术语速查</a>全表，或从<a href="#read">查词方法</a>了解如何拆解一个问题。对于涉及具体页面入口的问题，建议以哔哩哔哩站内当前显示为准。</p>
+        </div>
+        <aside class="aside">
+          <div class="panel">
+            <h4>快捷入口</h4>
+            <ul>
+              <li><a href="#about">词条概况</a><span>↑</span></li>
+              <li><a href="#terms">术语速查</a><span>↑</span></li>
+              <li><a href="#read">查词方法</a><span>↑</span></li>
+              <li><a href="#rules">社区约定</a><span>↑</span></li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h4>下载</h4>
+            <p>词条速查表整理版，便于离线翻阅。当前为占位入口，替换真实文件地址后即可使用。</p>
+            <p style="margin-top:12px">
+              <a class="btn btn-ghost" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1" style="pointer-events:none;display:inline-flex">下载</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>从一个词开始认识B站</h2>
+          <p>b站百科的价值在于把零散说法收拢成可查的条目。先查清一个词，再顺着关联条目读下去，理解会更快也更稳。</p>
+        </div>
+        <a class="btn" href="#terms">打开术语速查</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#fb7299"/>
+            <path d="M20 16l-6-6M44 16l6-6" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <rect x="12" y="20" width="40" height="28" rx="8" fill="#fff"/>
+            <circle cx="25" cy="33" r="3.4" fill="#fb7299"/>
+            <circle cx="39" cy="33" r="3.4" fill="#fb7299"/>
+          </svg>
+          b站百科
+        </div>
+        <p>围绕哔哩哔哩内容生态的条目知识页面，收录平台概况、常用术语、分区概念与社区规范，供访客按词检索与顺序阅读。</p>
+      </div>
+      <div>
+        <h5>内容栏目</h5>
+        <ul>
+          <li><a href="#about">词条概况</a></li>
+          <li><a href="#terms">常用术语</a></li>
+          <li><a href="#read">阅读与查词</a></li>
+          <li><a href="#rules">社区规范</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>使用说明</h5>
+        <ul>
+          <li><a href="#search">站内检索</a></li>
+          <li><a href="#cta">开始浏览</a></li>
+          <li><a href="#top">返回顶部</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">b站百科 · 条目以概念解释为主，具体功能与入口以哔哩哔哩站点当前状态为准。</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var btn = document.getElementById('goBtn');
+  var hint = document.getElementById('searchHint');
+  var resultText = document.getElementById('resultText');
+
+  var dict = {
+    '弹幕': '视频播放时在画面上滚动的即时评论，是B站最具辨识度的互动形式。',
+    '稿件': '用户上传并通过审核后发布在站内的内容，是内容组织的基本单位。',
+    'up主': '在B站持续投稿的内容创作者，其主页集中展示稿件、合集与动态。',
+    '追番': '对连载或已完结动画作品的订阅式追看行为，更新时会得到提示。',
+    '三连': '点赞、投币、收藏三项操作的合称，常用来衡量一条稿件的反馈热度。',
+    '分区': '按内容类型划分的栏目，如动画、游戏、知识、生活，决定稿件归类。',
+    '动态': '用户与创作者发布短内容的区域，可承载图文、转发与抽奖等信息。',
+    '硬核会员': '通过站内答题获得的会员身份，与普通注册账号在部分权限上存在差异。'
+  };
+
+  function doSearch(){
+    var raw = (q.value || '').trim();
+    if(!raw){
+      hint.innerHTML = '请先输入词条关键词，例如 <b>弹幕</b> 或 <b>稿件</b>。';
+      return;
+    }
+    var key = raw.toLowerCase().replace(/\s+/g,'');
+    if(dict[key]){
+      resultText.textContent = '「' + raw + '」：' + dict[key];
+      hint.innerHTML = '已找到词条 <b>' + raw + '</b>，释义见下方检索结果区。';
+      var target = document.getElementById('resultText');
+      if(target && target.scrollIntoView){
+        target.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    } else {
+      resultText.textContent = '未在本页词表中找到「' + raw + '」。可尝试：弹幕、稿件、UP主、追番、三连、分区、动态、硬核会员，或前往高频术语速查浏览完整列表。';
+      hint.innerHTML = '未匹配到 <b>' + raw + '</b>，可换用其他说法再试。';
+    }
+  }
+
+  btn.addEventListener('click', doSearch);
+  q.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+  });
+})();
+</script>
+
+</body>
+  </html>
