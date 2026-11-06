@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日黑料大赛官网-黑料大赛热点榜单_每日爆料吃瓜入口</title>
+<meta name="description" content="每日黑料大赛官网汇集每日热点黑料与大赛榜单，按日更新爆料条目与吃瓜入口，提供热点聚合、榜单速览与社区讨论线索。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101621'/%3E%3Cpath d='M18 20h28v8H18zm0 16h18v8H18z' fill='%23ff5a4d'/%3E%3Ccircle cx='46' cy='40' r='6' fill='%23ffd166'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0e131b;
+    --bg-soft:#151c27;
+    --card:#1a2230;
+    --line:#28323f;
+    --text:#e8edf4;
+    --muted:#9aa7b8;
+    --hot:#ff5a4d;
+    --gold:#ffd166;
+    --cyan:#4cc9f0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.75;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,19,27,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .head-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:12px 20px;max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:.5px;white-space:nowrap;}
+  .brand svg{flex:none;}
+  nav.top{display:flex;gap:22px;font-size:14px;color:var(--muted);}
+  nav.top a{transition:color .2s;}
+  nav.top a:hover{color:var(--gold);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:13px;}
+
+  /* hero */
+  .hero{
+    position:relative;overflow:hidden;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(700px 320px at 85% -10%,rgba(255,90,77,.20),transparent 70%),
+      radial-gradient(600px 300px at 0% 110%,rgba(76,201,240,.13),transparent 70%),
+      var(--bg-soft);
+  }
+  .hero-inner{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding:56px 20px 52px;max-width:1120px;margin:0 auto;}
+  .tagline{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--hot);border:1px solid rgba(255,90,77,.4);background:rgba(255,90,77,.08);padding:4px 12px;border-radius:99px;margin-bottom:18px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 4px rgba(255,90,77,.2);}
+  h1{font-size:clamp(26px,4vw,42px);line-height:1.3;font-weight:800;letter-spacing:.5px;margin-bottom:16px;}
+  h1 .hl{color:var(--hot);}
+  .hero p.lead{color:var(--muted);font-size:16px;max-width:34em;margin-bottom:26px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:10px;font-size:15px;font-weight:600;
+    border:1px solid transparent;transition:transform .15s,background .2s;
+  }
+  .btn-primary{background:var(--hot);color:#fff;}
+  .btn-primary:hover{background:#ff7064;transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+  .btn[aria-disabled="true"]{opacity:.6;cursor:not-allowed;}
+  .hero-art{display:flex;justify-content:center;}
+  .hero-art svg{width:100%;max-width:320px;height:auto;filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));}
+
+  /* section common */
+  section{padding:52px 0;}
+  .sec-head{margin-bottom:26px;}
+  .sec-head h2{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;}
+  .sec-head h2::before{content:"";width:5px;height:20px;border-radius:3px;background:var(--hot);display:inline-block;}
+  .sec-head p{color:var(--muted);font-size:14px;margin-top:8px;max-width:46em;}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+  .stat b{display:block;font-size:24px;color:var(--gold);font-weight:800;}
+  .stat span{font-size:13px;color:var(--muted);}
+
+  /* ranking */
+  .rank-list{display:flex;flex-direction:column;gap:12px;}
+  .rank-item{
+    display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 20px;transition:border-color .2s,transform .15s;
+  }
+  .rank-item:hover{border-color:rgba(255,90,77,.5);transform:translateX(2px);}
+  .rank-no{font-size:22px;font-weight:800;color:var(--hot);text-align:center;font-family:Impact,"Arial Black",sans-serif;}
+  .rank-no.n2{color:var(--gold);}
+  .rank-no.n3{color:var(--cyan);}
+  .rank-body h3{font-size:16px;font-weight:600;margin-bottom:4px;}
+  .rank-body p{font-size:13px;color:var(--muted);}
+  .badge{font-size:12px;color:var(--hot);border:1px solid rgba(255,90,77,.4);border-radius:99px;padding:2px 10px;white-space:nowrap;}
+  .badge.cool{color:var(--cyan);border-color:rgba(76,201,240,.4);}
+
+  /* cards grid */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;gap:10px;
+    transition:border-color .2s;
+  }
+  .card:hover{border-color:rgba(255,209,102,.4);}
+  .card .ico{width:38px;height:38px;border-radius:10px;background:rgba(255,90,77,.12);display:flex;align-items:center;justify-content:center;}
+  .card h3{font-size:16px;font-weight:700;}
+  .card p{font-size:14px;color:var(--muted);}
+  .card .more{font-size:13px;color:var(--gold);margin-top:auto;}
+
+  /* about + sidebar */
+  .split{display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:start;}
+  .article p{color:#c3cdda;font-size:15px;margin-bottom:14px;}
+  .article p strong{color:var(--gold);font-weight:600;}
+  .side{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px;}
+  .side h3{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--gold);}
+  .side ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .side li{font-size:14px;color:var(--muted);padding-bottom:12px;border-bottom:1px dashed var(--line);}
+  .side li:last-child{border-bottom:none;padding-bottom:0;}
+  .side li b{color:var(--text);font-weight:600;display:block;font-size:14px;margin-bottom:2px;}
+
+  /* search */
+  .search-box{
+    display:flex;gap:10px;flex-wrap:wrap;background:var(--card);
+    border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+  }
+  .search-box input{
+    flex:1;min-width:200px;background:var(--bg);border:1px solid var(--line);
+    border-radius:9px;padding:11px 14px;color:var(--text);font-size:14px;font-family:inherit;
+  }
+  .search-box input:focus{outline:none;border-color:var(--hot);}
+  .search-box button{
+    padding:11px 22px;border-radius:9px;border:none;background:var(--hot);color:#fff;
+    font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;
+  }
+  .search-box button:hover{background:#ff7064;}
+  .search-hint{font-size:13px;color:var(--muted);margin-top:10px;}
+  .no-result{font-size:14px;color:var(--hot);margin-top:10px;display:none;}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0 28px;font-size:13px;color:var(--muted);}
+  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:flex-start;}
+  .foot-brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);font-size:14px;}
+  .foot-links{display:flex;flex-wrap:wrap;gap:18px;}
+  .foot-links a:hover{color:var(--gold);}
+  .foot-note{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;line-height:1.8;}
+
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;padding:40px 20px 36px;gap:26px;}
+    .hero-art{order:-1;max-width:220px;margin:0 auto;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .grid3{grid-template-columns:1fr;}
+    .split{grid-template-columns:1fr;}
+  }
+  @media(max-width:640px){
+    nav.top{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;gap:0;background:var(--bg-soft);
+      border-bottom:1px solid var(--line);padding:6px 20px 14px;
+    }
+    nav.top.open{display:flex;}
+    nav.top a{padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px;}
+    .nav-toggle{display:block;}
+    .head-inner{position:relative;}
+    .brand{font-size:14px;}
+    .brand svg{width:26px;height:26px;}
+    .rank-item{grid-template-columns:38px 1fr;gap:12px;padding:14px 16px;}
+    .rank-item .badge{grid-column:2;justify-self:start;}
+    section{padding:40px 0;}
+    .article p{font-size:15px;}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <a class="brand" href="#top" aria-label="每日黑料大赛官网首页">
+      <svg width="32" height="32" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#101621"/>
+        <path d="M18 20h28v8H18zm0 16h18v8H18z" fill="#ff5a4d"/>
+        <circle cx="46" cy="40" r="6" fill="#ffd166"/>
+      </svg>
+      每日黑料大赛官网
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="topNav">菜单</button>
+    <nav class="top" id="topNav" aria-label="主导航">
+      <a href="#rank">热点榜单</a>
+      <a href="#topics">爆料分区</a>
+      <a href="#about">大赛说明</a>
+      <a href="#search">站内查找</a>
+      <a href="#faq">常见问答</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="tagline"><span class="dot"></span>当日热点 · 持续更新</span>
+        <h1>每日黑料大赛官网</h1>
+        <p class="lead">每日黑料大赛官网把当天的热点爆料汇总成可读的榜单：谁上榜、因何上榜、讨论集中在哪，一屏看明白。不追旧闻，只看今天被反复提起的那几条。</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#rank">看今日榜单</a>
+          <a class="btn btn-ghost" href="#search">查找关键词</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff5a4d"/>
+              <stop offset="1" stop-color="#ffd166"/>
+            </linearGradient>
+          </defs>
+          <rect x="30" y="34" width="230" height="172" rx="16" fill="#1a2230" stroke="#28323f"/>
+          <rect x="52" y="58" width="120" height="12" rx="6" fill="url(#g1)"/>
+          <rect x="52" y="86" width="186" height="8" rx="4" fill="#2f3b4c"/>
+          <rect x="52" y="106" width="150" height="8" rx="4" fill="#2f3b4c"/>
+          <rect x="52" y="126" width="170" height="8" rx="4" fill="#2f3b4c"/>
+          <rect x="52" y="152" width="88" height="26" rx="8" fill="#ff5a4d" opacity=".85"/>
+          <circle cx="248" cy="196" r="34" fill="#151c27" stroke="#28323f"/>
+          <path d="M248 178v20l14 9" stroke="#ffd166" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="268" cy="70" r="20" fill="#ff5a4d" opacity=".18"/>
+          <circle cx="268" cy="70" r="7" fill="#ff5a4d"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section aria-label="站点数据速览">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>每日</b><span>榜单刷新节奏</span></div>
+        <div class="stat"><b>6</b><span>热点分区</span></div>
+        <div class="stat"><b>Top 10</b><span>当日重点条目</span></div>
+        <div class="stat"><b>可搜</b><span>关键词直达条目</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING -->
+  <section id="rank">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>今日热点榜单</h2>
+        <p>每日黑料大赛官网榜单只收录当天讨论量集中的条目，序号代表当前热度位次，不代表事件性质。</p>
+      </div>
+      <div class="rank-list" id="rankList">
+        <article class="rank-item" data-title="网传某剧选角名单流出 剧组尚未回应">
+          <div class="rank-no">01</div>
+          <div class="rank-body">
+            <h3>网传某剧选角名单流出，剧组尚未回应</h3>
+            <p>名单截图在多个讨论区流传，官方账号暂无表态，信息以流传版本为准。</p>
+          </div>
+          <span class="badge">讨论升温</span>
+        </article>
+        <article class="rank-item" data-title="品牌联名海报文案被指撞梗 双方已删除">
+          <div class="rank-item-none"></div>
+          <div class="rank-no n2">02</div>
+          <div class="rank-body">
+            <h3>品牌联名海报文案被指撞梗，双方已删除</h3>
+            <p>争议集中在文案相似度，双方均未发布正式声明，海报已从公开渠道撤下。</p>
+          </div>
+          <span class="badge cool">已撤下</span>
+        </article>
+        <article class="rank-item" data-title="主播停播三日 粉丝群说法不一">
+          <div class="rank-no n3">03</div>
+          <div class="rank-body">
+            <h3>主播停播三日，粉丝群说法不一</h3>
+            <p>停播原因在群内出现多个版本，主播本人账号未更新，暂无可靠澄清。</p>
+          </div>
+          <span class="badge">待澄清</span>
+        </article>
+        <article class="rank-item" data-title="综艺片段剪辑争议 节目组称将复核">
+          <div class="rank-no">04</div>
+          <div class="rank-body">
+            <h3>综艺片段剪辑争议，节目组称将复核</h3>
+            <p>讨论聚焦剪辑是否改变语境，节目组回应称会复核相关片段。</p>
+          </div>
+          <span class="badge cool">已回应</span>
+        </article>
+        <article class="rank-item" data-title="旧闻被重新翻炒 时间线存在出入">
+          <div class="rank-no">05</div>
+          <div class="rank-body">
+            <h3>旧闻被重新翻炒，时间线存在出入</h3>
+            <p>该条内容为往年事件再传播，部分转发版本时间标注有误，阅读时需留意。</p>
+          </div>
+          <span class="badge">需核对</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section id="topics">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>爆料分区</h2>
+        <p>每日黑料大赛官网按领域拆分入口，方便按兴趣直达，不必从头翻榜单。</p>
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5a4d" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          </div>
+          <h3>娱乐片场</h3>
+          <p>选角、路透、剧组动态集中在这里，条目以流传版本与原话表述为主。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round"><path d="M12 3l9 5v8l-9 5-9-5V8z"/><path d="M12 12l9-5M12 12v9M12 12L3 7"/></svg>
+          </div>
+          <h3>品牌公关</h3>
+          <p>联名、广告、声明与撤回动作，记录争议出现到回应的完整顺序。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+          </div>
+          <h3>直播与综艺</h3>
+          <p>停播、剪辑、片段争议，重点标注是否已有官方回应。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5a4d" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3>旧闻复核</h3>
+          <p>被再次翻炒的旧料会标出原始时间，避免新读者误读为当日新事。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          </div>
+          <h3>热度走势</h3>
+          <p>看条目在一天内的位次变化，上升快与已降温一眼分辨。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+        <div class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4cc9f0" stroke-width="2" stroke-linecap="round"><path d="M21 15a4 4 0 01-4 4H8l-5 3V6a3 3 0 013-3h11a4 4 0 014 4z"/></svg>
+          </div>
+          <h3>讨论线索</h3>
+          <p>汇总各处的讨论方向，只标出现频次，不代替你下判断。</p>
+          <a class="more" href="#rank">进入分区 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap split">
+      <div class="article">
+        <div class="sec-head">
+          <h2>关于这场热点大赛</h2>
+        </div>
+        <p><strong>每日黑料大赛官网</strong>里的“大赛”不是报名参赛的活动，而是对每天热点爆料的一次集中排位。条目按当天被提及的频次排列，序号靠前只说明讨论更集中，并不等于事实更确凿。</p>
+        <p>每条记录尽量保留三个要素：流传的原始说法、目前是否已有回应、时间标注是否清楚。三者齐全的条目排在前面，缺少回应的会明确标注“待澄清”，被重新翻炒的旧闻则单独提醒。</p>
+        <p>我们不替任何一方下结论，也不对当事人作评价。榜单的作用是把散落的讨论收拢成一页，让你在几分钟内知道今天大家在聊什么、聊到了哪一步。</p>
+        <p>如果你只想看某一类内容，可以用下方的站内查找直接输入关键词，榜单会即时筛出匹配条目。每日黑料大赛官网的更新以自然日为单位，跨日后的旧条目不再保留在当日榜单中。</p>
+      </div>
+      <aside class="side">
+        <h3>阅读前须知</h3>
+        <ul>
+          <li><b>位次≠性质</b>排名依据讨论热度，与事件真假无关。</li>
+          <li><b>看回应状态</b>“已回应”与“待澄清”分开标注，别混读。</li>
+          <li><b>留意时间</b>旧闻再传播会单独标记原始年份。</li>
+          <li><b>以原话为准</b>转述版本可能有出入，优先看原始表述。</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <section id="search">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>站内查找</h2>
+        <p>输入片场、联名、停播、旧闻等词，即时筛选上方榜单条目。</p>
+      </div>
+      <form class="search-box" id="searchForm" role="search" onsubmit="return false;">
+        <input type="search" id="q" placeholder="输入关键词，例如：选角、联名、停播" aria-label="输入关键词筛选榜单">
+        <button type="button" id="searchBtn">筛选</button>
+        <button type="button" id="resetBtn" style="background:#2a3442;">重置</button>
+      </form>
+      <p class="search-hint" id="hint">当前显示全部 5 条榜单记录。</p>
+      <p class="no-result" id="noResult">没有匹配的条目，换个词试试，或点击重置查看全部。</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常见问答</h2>
+        <p>关于每日黑料大赛官网的更新方式与阅读方式，集中回答几个高频问题。</p>
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <h3>多久更新一次？</h3>
+          <p>以自然日为单位汇总，当天条目当天可见，跨日后旧条目退出当日榜单。</p>
+        </div>
+        <div class="card">
+          <h3>为什么有的条目没有结论？</h3>
+          <p>当事方未回应时，页面只呈现流传说法并标注“待澄清”，不代填结论。</p>
+        </div>
+        <div class="card">
+          <h3>可以下载榜单吗？</h3>
+          <p>榜单下载入口正在接入，按钮暂不可用；页面内容可直接阅读与检索。</p>
+          <a class="btn btn-ghost" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1" style="pointer-events:none;align-self:flex-start;margin-top:8px;font-size:13px;padding:8px 16px;">下载</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#101621"/>
+          <path d="M18 20h28v8H18zm0 16h18v8H18z" fill="#ff5a4d"/>
+          <circle cx="46" cy="40" r="6" fill="#ffd166"/>
+        </svg>
+        每日黑料大赛官网
+      </div>
+      <div class="foot-links">
+        <a href="#rank">热点榜单</a>
+        <a href="#topics">爆料分区</a>
+        <a href="#about">大赛说明</a>
+        <a href="#search">站内查找</a>
+        <a href="#faq">常见问答</a>
+      </div>
+    </div>
+    <p class="foot-note">每日黑料大赛官网聚合当日讨论集中的热点条目，位次仅反映热度，不代表事件真实性。条目以流传版本与公开回应为准，涉及当事人的信息请以官方表述为最终依据。</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('topNav');
+    if(toggle && nav){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.addEventListener('click', function(e){
+        if(e.target.tagName === 'A'){
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    }
+
+    var inputs = document.getElementById('q');
+    var items = Array.prototype.slice.call(document.querySelectorAll('#rankList .rank-item'));
+    var hint = document.getElementById('hint');
+    var noResult = document.getElementById('noResult');
+
+    function filter(){
+      var kw = (inputs.value || '').trim().toLowerCase();
+      var shown = 0;
+      items.forEach(function(item){
+        var title = (item.getAttribute('data-title') || '').toLowerCase();
+        var text = item.textContent.toLowerCase();
+        var match = kw === '' || title.indexOf(kw) > -1 || text.indexOf(kw) > -1;
+        item.style.display = match ? '' : 'none';
+        if(match) shown++;
+      });
+      hint.textContent = kw === '' ? '当前显示全部 ' + items.length + ' 条榜单记录。'
+                                   : '关键词“' + inputs.value.trim() + '”匹配到 ' + shown + ' 条记录。';
+      noResult.style.display = shown === 0 ? 'block' : 'none';
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', filter);
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      inputs.value = '';
+      filter();
+    });
+    inputs.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); filter(); }
+    });
+  })();
+</script>
+</body>
+</html>
